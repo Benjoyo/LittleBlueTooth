@@ -81,7 +81,7 @@ public class CBCentralManagerDelegateProxy: NSObject {
         _willRestoreStatePublisher.shareReplay(1).eraseToAnyPublisher()
     }()
     
-    let _centralStatePublisher = CurrentValueSubject<BluetoothState, Never>(.unknown)
+    public let _centralStatePublisher = CurrentValueSubject<BluetoothState, Never>(.unknown)
     let _willRestoreStatePublisher = PassthroughSubject<CentralRestorer, Never>()
 
     var isLogEnabled: Bool = false
