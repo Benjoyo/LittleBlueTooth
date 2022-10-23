@@ -173,8 +173,8 @@ public class LittleBlueTooth: Identifiable {
     private var restoreStateCancellable: AnyCancellable?
     private var _isLogEnabled: Bool = false
 
-    var cbCentral: CBCentralManager
-    var centralProxy = CBCentralManagerDelegateProxy()
+    public var cbCentral: CBCentralManager
+    public var centralProxy = CBCentralManagerDelegateProxy()
     
     // MARK: - Init
     public init(with configuration: LittleBluetoothConfiguration) {
