@@ -68,7 +68,7 @@ public enum BluetoothState {
     }
 }
 
-class CBCentralManagerDelegateProxy: NSObject {
+public class CBCentralManagerDelegateProxy: NSObject {
     
     let centralDiscoveriesPublisher = PassthroughSubject<PeripheralDiscovery, Never>()
     let connectionEventPublisher = PassthroughSubject<ConnectionEvent, Never>()
