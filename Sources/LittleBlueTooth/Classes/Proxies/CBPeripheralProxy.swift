@@ -53,14 +53,14 @@ public class CBPeripheralDelegateProxy: NSObject {
 
 extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
     
-    func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral){
+    public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral){
         log("[LBT: CBPD] ReadyToSendWRiteWOResp",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug, arg: [])
         peripheralIsReadyToSendWriteWithoutResponse.send()
     }
 
-    func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
+    public func peripheralDidUpdateName(_ peripheral: CBPeripheral) {
         log("[LBT: CBPD] DidUpdateName %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
@@ -68,7 +68,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         peripheralChangesPublisher.send(.name(peripheral.name))
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]){
+    public func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]){
         log("[LBT: CBPD] DidModifyServices %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
@@ -76,7 +76,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         peripheralChangesPublisher.send(.invalidatedServices(invalidatedServices))
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         if let error = error {
             peripheralRSSIPublisher.send((RSSI.intValue,.couldNotReadRSSI(error)))
         } else {
@@ -84,7 +84,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?){
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?){
         log("[LBT: CBPD] DidDiscoverServices, Error %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
@@ -96,7 +96,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: Error?) {
         log("[LBT: CBPD] DidDiscoverIncludedServices %{public}@, Error %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
@@ -109,7 +109,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?){
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?){
         log("[LBT: CBPD] DidDiscoverCharacteristic %{public}@, Error %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
@@ -122,7 +122,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?){
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?){
         log("[LBT: CBPD] DidUpdateValue %{public}@, Error %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
@@ -139,7 +139,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         log("[LBT: CBPD] DidWriteValue %{public}@, Error %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
@@ -152,7 +152,7 @@ extension CBPeripheralDelegateProxy: CBPeripheralDelegate {
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?){
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?){
         log("[LBT: CBPD] DidUpdateNotifState %{public}@, Error %{public}@",
             log: OSLog.LittleBT_Log_Peripheral,
             type: .debug,
