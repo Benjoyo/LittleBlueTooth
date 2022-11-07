@@ -197,7 +197,7 @@ public class Peripheral: Identifiable {
                     case let (_, error?):
                         throw error
                     case let (service, _):
-                        print("[LB] getCharateristic success")
+                        
                         return service
                     }
                 }
@@ -216,7 +216,7 @@ public class Peripheral: Identifiable {
         }), let charact = service.characteristics?.first(where: { characteristic in
             characteristic.uuid == charateristicUUID
         }) {
-            print("[LB] service and characteristic already discovered")
+            
             return Result<CBCharacteristic, LittleBluetoothError>.Publisher(.success(charact)).eraseToAnyPublisher()
         }
         
@@ -227,7 +227,7 @@ public class Peripheral: Identifiable {
                     .customPrint("[LBT] Discover service", isEnabled: isLogEnabled)
                     .flatMap { services -> AnyPublisher<CBService, LittleBluetoothError> in
                         let service = services!.filter{ $0.uuid == serviceUUID}.first!
-                        print("[LB] getService success")
+                        
                         return self.getCharateristic(characteristicUUID: charateristicUUID, from: service)
                     }
                     .customPrint("[LBT] Discover characteristic", isEnabled: isLogEnabled)
@@ -350,15 +350,15 @@ public class Peripheral: Identifiable {
                 discoverCharacteristic(charateristicUUID, fromService: serviceUUID)
                     .flatMap { characteristic -> AnyPublisher<CBCharacteristic, LittleBluetoothError> in
                         if response {
-                            print("[LB] cbPeripheral.writeValue")
+                            
                             self.cbPeripheral.writeValue(data, for: characteristic, type: .withResponse)
                             return self.peripheralProxy.peripheralWrittenValueForCharacteristicPublisher.tryMap { (value) -> CBCharacteristic in
                                 switch value {
                                 case let (_, error?):
-                                    print("[LB] cbPeripheral.writeValue ERROR")
+                                   
                                     throw error
                                 case let (charact, _):
-                                    print("[LB] cbPeripheral.writeValue SUCCESS")
+                                  
                                     return charact
                                 }
                             }
